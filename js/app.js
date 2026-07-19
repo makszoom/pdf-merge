@@ -84,14 +84,36 @@ function renderFiles() {
             '<span class="file-icon">📄</span>' +
             '<span class="file-name">' + escapeHtml(file.name) + '</span>' +
             '<span class="file-size">' + formatSize(file.size) + '</span>' +
+            '<button class="file-move-up" data-index="' + i + '" title="Move up"' + (i === 0 ? ' disabled' : '') + '>↑</button>' +
+            '<button class="file-move-down" data-index="' + i + '" title="Move down"' + (i === files.length - 1 ? ' disabled' : '') + '>↓</button>' +
             '<button class="file-remove" data-index="' + i + '">✕</button>' +
         '</div>'
     ).join('');
+    // Add move up listeners
+    filesEl.querySelectorAll('.file-move-up').forEach(btn => {
+        btn.addEventListener('click', () => moveUp(parseInt(btn.dataset.index)));
+    });
+    // Add move down listeners
+    filesEl.querySelectorAll('.file-move-down').forEach(btn => {
+        btn.addEventListener('click', () => moveDown(parseInt(btn.dataset.index)));
+    });
     // Add remove listeners
     filesEl.querySelectorAll('.file-remove').forEach(btn => {
         btn.addEventListener('click', () => removeFile(parseInt(btn.dataset.index)));
     });
     mergeBtn.disabled = files.length < 2;
+}
+
+function moveUp(index) {
+    if (index <= 0) return;
+    [files[index - 1], files[index]] = [files[index], files[index - 1]];
+    renderFiles();
+}
+
+function moveDown(index) {
+    if (index >= files.length - 1) return;
+    [files[index], files[index + 1]] = [files[index + 1], files[index]];
+    renderFiles();
 }
 
 function removeFile(index) {
