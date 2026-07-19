@@ -172,6 +172,31 @@ body {
 
 .file-remove:hover { opacity: 1; background: #f0f0f0; }
 
+.file-move-up,
+.file-move-down {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px 6px;
+    border-radius: 4px;
+    opacity: 0.4;
+    color: var(--fg);
+    font-weight: 600;
+}
+
+.file-move-up:hover:not(:disabled),
+.file-move-down:hover:not(:disabled) {
+    opacity: 1;
+    background: #f0f0f0;
+}
+
+.file-move-up:disabled,
+.file-move-down:disabled {
+    opacity: 0.15;
+    cursor: not-allowed;
+}
+
 /* ========== Buttons ========== */
 .btn-primary {
     display: flex;
