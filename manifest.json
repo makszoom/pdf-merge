@@ -1,0 +1,18 @@
+{
+  "name": "PDFMerge — Merge PDF Files",
+  "short_name": "PDFMerge",
+  "description": "Merge PDF files in your browser. No upload, no registration.",
+  "start_url": "/pdf-merge/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
