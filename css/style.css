@@ -393,10 +393,25 @@ body {
 
 /* ========== Mobile ========== */
 @media (max-width: 640px) {
-    .hero h1 { font-size: 32px; }
-    .feature-grid { grid-template-columns: 1fr; }
-    .drop-zone { padding: 40px 20px; }
+    .container { padding: 0 16px; }
+    .header { padding: 16px 0; }
+    .header .badge { font-size: 11px; padding: 3px 8px; }
+    .hero { padding: 32px 0 24px; }
+    .hero h1 { font-size: 28px; }
+    .subtitle { font-size: 16px; }
+    .drop-zone { padding: 32px 16px; }
+    .drop-icon { font-size: 36px; }
+    .drop-text { font-size: 16px; }
+    .drop-sub { font-size: 13px; }
+    .btn-primary { padding: 14px 20px; font-size: 15px; }
+    .feature-grid { grid-template-columns: 1fr; gap: 16px; }
+    .feature { padding: 20px; }
     .modal-content { padding: 24px; }
+    .price-amount { font-size: 36px; }
+    .file-item { padding: 10px 12px; gap: 8px; }
+    .file-list-header { padding: 10px 12px; }
+    .file-name { font-size: 13px; }
+    .file-size { font-size: 12px; }
 }
 
 /* ========== Animations ========== */
