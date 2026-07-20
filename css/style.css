@@ -58,7 +58,7 @@ body {
     font-size: 48px;
     font-weight: 700;
     line-height: 1.1;
-    letter-spacing: -1.5px;
+    letter-spacing: -0.03em;
     margin-bottom: 16px;
 }
 
@@ -83,12 +83,18 @@ body {
     transition: all 0.2s ease;
     cursor: pointer;
     margin-bottom: 24px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .drop-zone:hover,
 .drop-zone.dragover {
     border-color: var(--accent);
     background: #fafafa;
+}
+
+.drop-zone:active {
+    transform: scale(0.99);
+    transition: transform 0.1s ease-out;
 }
 
 .drop-icon { font-size: 48px; margin-bottom: 16px; }
@@ -141,7 +147,12 @@ body {
 
 .btn-text:hover { color: var(--fg); background: #f0f0f0; }
 
-.files { max-height: 300px; overflow-y: auto; }
+.files {
+    max-height: 300px;
+    overflow-y: auto;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 8px, black calc(100% - 8px), transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, black 8px, black calc(100% - 8px), transparent 100%);
+}
 
 .file-item {
     display: flex;
@@ -214,11 +225,17 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: var(--shadow);
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btn-primary:hover {
     transform: translateY(-1px);
     box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease-out;
 }
 
 .btn-primary:disabled {
@@ -270,12 +287,16 @@ body {
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 100;
     padding: 24px;
+    opacity: 0;
+    animation: modalOverlayIn 0.25s ease forwards;
 }
 
 .modal-content {
@@ -285,10 +306,22 @@ body {
     max-width: 440px;
     width: 100%;
     text-align: center;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-lg), 0 16px 48px rgba(0,0,0,0.12);
     position: relative;
     max-height: 90vh;
     overflow-y: auto;
+    transform: scale(0.95);
+    opacity: 0;
+    animation: modalContentIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes modalOverlayIn {
+    to { opacity: 1; }
+}
+
+@keyframes modalContentIn {
+    to { transform: scale(1); opacity: 1; }
 }
 
 .payment-modal { padding: 36px 32px; }
@@ -306,11 +339,17 @@ body {
     padding: 4px 8px;
     border-radius: 4px;
     transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .payment-close:hover {
     color: var(--fg);
     background: #f0f0f0;
+}
+
+.payment-close:active {
+    transform: scale(0.9);
+    transition: transform 0.1s ease-out;
 }
 
 .modal-icon { font-size: 48px; margin-bottom: 16px; }
@@ -347,6 +386,7 @@ body {
     font-size: 48px;
     font-weight: 700;
     line-height: 1;
+    letter-spacing: -0.03em;
     margin-bottom: 8px;
 }
 
@@ -552,11 +592,17 @@ body {
     border: 1px solid var(--border);
     border-radius: var(--radius);
     transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .feature:hover {
     border-color: var(--border-hover);
     box-shadow: var(--shadow);
+}
+
+.feature:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease-out;
 }
 
 .feature-icon { font-size: 28px; margin-bottom: 12px; }
@@ -645,3 +691,30 @@ body {
 }
 
 .file-item { animation: fadeIn 0.2s ease; }
+
+/* ========== Reduced Motion (Apple Design — accessibility) ========== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .modal {
+        animation: none;
+        opacity: 1;
+    }
+
+    .modal-content {
+        animation: none;
+        transform: none;
+        opacity: 1;
+    }
+
+    .file-item {
+        animation: none;
+    }
+}
