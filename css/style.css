@@ -270,7 +270,7 @@ body {
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -282,10 +282,35 @@ body {
     background: var(--bg);
     border-radius: var(--radius);
     padding: 40px;
-    max-width: 420px;
+    max-width: 440px;
     width: 100%;
     text-align: center;
     box-shadow: var(--shadow-lg);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.payment-modal { padding: 36px 32px; }
+
+/* Close button */
+.payment-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--muted);
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.payment-close:hover {
+    color: var(--fg);
+    background: #f0f0f0;
 }
 
 .modal-icon { font-size: 48px; margin-bottom: 16px; }
@@ -296,12 +321,13 @@ body {
     margin-bottom: 8px;
 }
 
-.modal-content > p {
+.modal-desc {
     color: var(--muted);
     margin-bottom: 24px;
+    font-size: 15px;
 }
 
-.pricing { margin-bottom: 24px; }
+.pricing { margin-bottom: 20px; }
 
 .price-card {
     border: 2px solid var(--accent);
@@ -326,7 +352,180 @@ body {
 
 .price-desc { font-size: 14px; color: var(--muted); }
 
-.modal-note {
+/* Payment network badge */
+.payment-network { margin-bottom: 20px; }
+
+.network-badge {
+    display: inline-block;
+    background: #f0f0f0;
+    color: var(--fg);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+}
+
+/* QR Code section */
+.qr-section {
+    margin-bottom: 24px;
+}
+
+.payment-qr {
+    width: 180px;
+    height: 180px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    display: block;
+    margin: 0 auto 12px;
+}
+
+.qr-hint {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* Address copy section */
+.address-section {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.payment-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.address-box {
+    display: flex;
+    gap: 8px;
+}
+
+.address-box input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    color: var(--fg);
+    background: #fafafa;
+    min-width: 0;
+}
+
+.btn-copy {
+    padding: 12px 20px;
+    background: var(--accent-bg);
+    color: var(--accent-fg);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.btn-copy:hover {
+    transform: translateY(-1px);
+}
+
+.btn-copy.copied {
+    background: #22c55e;
+}
+
+/* TXID section */
+.txid-section {
+    text-align: left;
+}
+
+.txid-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.txid-input-group input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    color: var(--fg);
+    background: var(--bg);
+    min-width: 0;
+}
+
+.txid-input-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.btn-verify {
+    padding: 12px 24px;
+    background: var(--accent-bg);
+    color: var(--accent-fg);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.btn-verify:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.btn-verify:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Payment status */
+.payment-status {
+    margin-top: 12px;
+    font-size: 14px;
+    text-align: left;
+    min-height: 20px;
+}
+
+.payment-status.success {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+.payment-status.error {
+    color: #ef4444;
+    font-weight: 500;
+}
+
+.payment-status.loading {
+    color: var(--muted);
+}
+
+/* Spinner */
+.payment-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.payment-note {
     font-size: 13px;
     color: var(--muted);
     margin-top: 16px;
