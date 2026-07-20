@@ -65,21 +65,71 @@
             </div>
         </section>
 
-        <!-- Paywall Modal -->
+        <!-- Payment Modal -->
         <div class="modal" id="paywallModal" style="display: none;">
-            <div class="modal-content">
+            <div class="modal-content payment-modal">
+                <button class="payment-close" id="paymentClose">✕</button>
                 <div class="modal-icon">🔒</div>
-                <h2>Free limit reached</h2>
-                <p>You've used all 5 free merges.</p>
+                <h2>Unlock Unlimited Merges</h2>
+                <p class="modal-desc">You've used all 5 free merges. Pay once — use forever.</p>
+
                 <div class="pricing">
                     <div class="price-card">
-                        <div class="price-title">Lifetime</div>
+                        <div class="price-title">Lifetime License</div>
                         <div class="price-amount">$5</div>
-                        <div class="price-desc">Unlimited merges forever</div>
+                        <div class="price-desc">Unlimited merges forever. No subscription.</div>
                     </div>
                 </div>
-                <button class="btn-primary" id="payBtn">Unlock for $5</button>
-                <p class="modal-note">Pay with USDT (TRC-20) — instant unlock</p>
+
+                <!-- Payment Network -->
+                <div class="payment-network">
+                    <span class="network-badge">⚡ USDT TRC-20 (Tron)</span>
+                </div>
+
+                <!-- QR Code -->
+                <div class="qr-section">
+                    <img
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=tron:TCQTHvLP1ZctspY8UEgsWjy8xqe5tUTtFc%3Famount%3D5"
+                        alt="Payment QR Code"
+                        class="payment-qr"
+                        id="paymentQR"
+                    />
+                    <p class="qr-hint">Scan with TronLink, Trust Wallet, or Bybit</p>
+                </div>
+
+                <!-- Address Copy -->
+                <div class="address-section">
+                    <label class="payment-label">Or copy address manually:</label>
+                    <div class="address-box">
+                        <input
+                            type="text"
+                            id="paymentAddress"
+                            value="TCQTHvLP1ZctspY8UEgsWjy8xqe5tUTtFc"
+                            readonly
+                        />
+                        <button class="btn-copy" id="copyBtn">Copy</button>
+                    </div>
+                </div>
+
+                <!-- TXID Input -->
+                <div class="txid-section">
+                    <label class="payment-label">After sending, paste your Transaction ID (TXID):</label>
+                    <div class="txid-input-group">
+                        <input
+                            type="text"
+                            id="txidInput"
+                            placeholder="Paste TXID here (64 characters)"
+                            maxlength="64"
+                            spellcheck="false"
+                        />
+                        <button class="btn-verify" id="verifyBtn">
+                            Verify
+                        </button>
+                    </div>
+                    <div id="paymentStatus" class="payment-status"></div>
+                </div>
+
+                <p class="payment-note">⏱ Wait 30-60 seconds after sending before verifying.</p>
             </div>
         </div>
 
