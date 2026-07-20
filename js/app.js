@@ -14,7 +14,6 @@ const progressText = document.getElementById('progressText');
 const counter = document.getElementById('counter');
 const mergesLeft = document.getElementById('mergesLeft');
 const paywallModal = document.getElementById('paywallModal');
-const payBtn = document.getElementById('payBtn');
 
 let files = [];
 const MAX_FREE_MERGES = 5;
@@ -188,19 +187,125 @@ mergeBtn.addEventListener('click', async () => {
     }
 });
 
+// ═══════ Payment Configuration ═══════
+const PAYMENT_CONFIG = {
+    WORKER_URL: 'https://pdfmerge-payment.makszoom85.workers.dev',
+    TRC20_ADDRESS: 'TCQTHvLP1ZctspY8UEgsWjy8xqe5tUTtFc',
+    PRICE: 5
+};
+
+// Payment elements
+const paymentClose = document.getElementById('paymentClose');
+const copyBtn = document.getElementById('copyBtn');
+const txidInput = document.getElementById('txidInput');
+const verifyBtn = document.getElementById('verifyBtn');
+const paymentStatus = document.getElementById('paymentStatus');
+
 // Paywall
 function showPaywall() { paywallModal.style.display = 'flex'; }
-paywallModal.addEventListener('click', (e) => { if (e.target === paywallModal) paywallModal.style.display = 'none'; });
-payBtn.addEventListener('click', () => {
-    const address = 'YOUR_TRC20_ADDRESS';
-    alert('Send 5 USDT (TRC-20) to:\n' + address + '\n\nThen paste your TXID to unlock.');
-    if (confirm('Developer: unlock now?')) {
-        localStorage.setItem('pdfmerge_unlocked', 'true');
-        paywallModal.style.display = 'none';
-        updateCounter();
-        alert('Unlocked! You now have unlimited merges.');
-    }
-});
+function closePaywall() { paywallModal.style.display = 'none'; }
+
+paywallModal.addEventListener('click', (e) => { if (e.target === paywallModal) closePaywall(); });
+if (paymentClose) paymentClose.addEventListener('click', closePaywall);
+
+// Copy address
+if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(PAYMENT_CONFIG.TRC20_ADDRESS);
+            copyBtn.textContent = '✓ Copied';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+                copyBtn.textContent = 'Copy';
+                copyBtn.classList.remove('copied');
+            }, 2000);
+        } catch (e) {
+            // Fallback
+            const addrInput = document.getElementById('paymentAddress');
+            addrInput.select();
+            document.execCommand('copy');
+            copyBtn.textContent = '✓ Copied';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+                copyBtn.textContent = 'Copy';
+                copyBtn.classList.remove('copied');
+            }, 2000);
+        }
+    });
+}
+
+// Verify payment
+if (verifyBtn) {
+    verifyBtn.addEventListener('click', async () => {
+        const txId = txidInput.value.trim();
+
+        if (!txId) {
+            showStatus('Please paste your TXID first.', 'error');
+            return;
+        }
+
+        if (!/^[a-fA-F0-9]{64}$/.test(txId)) {
+            showStatus('Invalid TXID format. Must be 64 hex characters.', 'error');
+            return;
+        }
+
+        // Loading state
+        verifyBtn.disabled = true;
+        verifyBtn.textContent = 'Verifying...';
+        showStatus('<span class="payment-spinner"></span>Verifying transaction on blockchain...', 'loading');
+
+        try {
+            const response = await fetch(PAYMENT_CONFIG.WORKER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ txId })
+            });
+
+            const data = await response.json();
+
+            if (data.verified) {
+                // Success — unlock!
+                localStorage.setItem('pdfmerge_unlocked', 'true');
+                showStatus('✅ Payment verified! Unlimited merges activated.', 'success');
+                verifyBtn.textContent = '✓ Unlocked';
+
+                setTimeout(() => {
+                    closePaywall();
+                    updateCounter();
+                    // Reset button for future
+                    verifyBtn.disabled = false;
+                    verifyBtn.textContent = 'Verify';
+                    txidInput.value = '';
+                    paymentStatus.innerHTML = '';
+                }, 2500);
+            } else {
+                // Error from worker
+                showStatus('❌ ' + (data.message || 'Verification failed.'), 'error');
+                verifyBtn.disabled = false;
+                verifyBtn.textContent = 'Verify';
+            }
+        } catch (err) {
+            showStatus('❌ Network error. Check your connection and try again.', 'error');
+            verifyBtn.disabled = false;
+            verifyBtn.textContent = 'Verify';
+        }
+    });
+}
+
+// Allow Enter key in TXID field
+if (txidInput) {
+    txidInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            verifyBtn.click();
+        }
+    });
+}
+
+function showStatus(message, type) {
+    paymentStatus.className = 'payment-status ' + type;
+    paymentStatus.innerHTML = message;
+}
 
 // Helpers
 function escapeHtml(text) {
