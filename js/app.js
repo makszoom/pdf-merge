@@ -324,4 +324,10 @@ function formatSize(bytes) {
 
 // Init
 updateCounter();
+
+// Open paywall modal when arriving with #paywall (PDF Merge Extension)
+if (window.location.hash === '#paywall') {
+  showPaywall();
+}
+
 console.log('PDFMerge loaded. PDFLib available:', typeof PDFLib !== 'undefined');
