@@ -11,24 +11,22 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pdfmerge.dev/combine-pdf</loc>
+    <loc>https://pdfmerge.dev/split-pdf</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pdfmerge.dev/pdf-merger-online</loc>
-    <lastmod>2026-08-20</lastmod>
+    <loc>https://pdfmerge.dev/compress-pdf</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pdfmerge.dev/merge-pdf-files</loc>
-    <lastmod>2026-08-20</lastmod>
+    <loc>https://pdfmerge.dev/rotate-pdf</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pdfmerge.dev/join-pdf</loc>
+    <loc>https://pdfmerge.dev/remove-pages</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
