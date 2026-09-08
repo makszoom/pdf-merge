@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotate PDF — Turn PDF Pages Online Free (No Upload)</title>
+    <meta name="description" content="Rotate PDF pages online for free — 90, 180 or 270 degrees. Fix sideways scans in your browser. No upload, 100% private.">
+    <link rel="canonical" href="https://pdfmerge.dev/rotate-pdf">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📄%3C/text%3E%3C/svg%3E">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to Rotate a PDF Online", "totalTime": "PT1M", "step": [{"@type": "HowToStep", "position": 1, "name": "Select PDF", "text": "Drag and drop the PDF with sideways pages."}, {"@type": "HowToStep", "position": 2, "name": "Pick Angle", "text": "Choose 90°, 180° or 270° and which pages to rotate (blank = all)."}, {"@type": "HowToStep", "position": 3, "name": "Download", "text": "Click Rotate and save the corrected PDF."}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I permanently rotate a PDF?", "acceptedAnswer": {"@type": "Answer", "text": "Choose an angle and click Rotate. The change is saved into the PDF structure — it is not just a viewer setting, so every PDF reader will show the pages rotated correctly."}}, {"@type": "Question", "name": "Can I rotate only some pages?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Leave the pages field blank to rotate the whole document, or type specific pages like \"1, 3-5\" to rotate only those."}}, {"@type": "Question", "name": "My scan is sideways — will this fix it?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, that is the most common use. Rotate 90° or 270° and the pages will display upright in every reader, on every device."}}, {"@type": "Question", "name": "Does rotating reduce quality?", "acceptedAnswer": {"@type": "Answer", "text": "No. Rotation changes only the page orientation metadata — text, images and vectors stay exactly as they were."}}]}</script>
+</head>
+<body data-tool="rotate">
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo" style="text-decoration:none;color:inherit;">📄 PDFMerge</a>
+            <div class="badge">Free • No Upload • Browser-Only</div>
+        </header>
+
+        <section class="hero">
+            <h1>Rotate PDF <span class="highlight">In Your Browser</span></h1>
+            <p class="subtitle">Turn pages 90°, 180° or 270°. Fix sideways scans without uploading anything.</p>
+        </section>
+
+        <section class="tool">
+            <div class="drop-zone" id="dropZone">
+                <div class="drop-icon">📁</div>
+                <p class="drop-text">Drag & drop PDF files here</p>
+                <p class="drop-sub">or <span class="link" id="filePicker">click to select</span> — batch up to 30 files with Pro</p>
+                <input type="file" id="fileInput" multiple accept=".pdf" hidden>
+            </div>
+
+            <div class="file-list" id="fileList" style="display: none;">
+                <div class="file-list-header">
+                    <span>Files (<span id="fileCount">0</span>)</span>
+                    <button class="btn-text" id="clearAll">Clear all</button>
+                </div>
+                <div class="files" id="files"></div>
+            </div>
+
+            <div id="toolOptions" class="tool-options"></div>
+
+            <button class="btn-primary" id="runBtn" disabled>
+                <span class="btn-icon">⬇️</span>
+                Rotate & Download
+            </button>
+
+            <div class="progress" id="progress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">Processing...</p>
+            </div>
+
+            <div class="counter" id="counter"></div>
+        </section>
+
+        <section class="about-text">
+            <h2>About this tool</h2>
+            <p>Choose <strong>90°, 180° or 270°</strong> for all pages or just a selection. Rotation is written into the file itself — not a temporary viewer setting.</p>
+        </section>
+
+        <section class="features">
+            <h2>Why PDFMerge Tools?</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Private</h3>
+                    <p>Files never leave your browser. No server, no upload, no data collection.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant</h3>
+                    <p>No upload wait. Processing happens locally in seconds.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <h3>Free to Try</h3>
+                    <p>5 free operations. $5 lifetime for unlimited, $9 for batch Pro.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h3>Works Everywhere</h3>
+                    <p>Any modern browser, any device. No installation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="related">
+            <h2>More PDF Tools</h2>
+            <div class="related-grid">
+                <a href="/" class="related-card">
+                    <h3>Merge PDF</h3>
+                    <p>Combine multiple PDFs into one file</p>
+                </a>
+                <a href="split-pdf" class="related-card"><h3>Split PDF</h3><p>Extract pages from a PDF instantly. No upload — your document never leaves your device.</p></a><a href="compress-pdf" class="related-card"><h3>Compress PDF</h3><p>Shrink PDF file size without uploading. Choose quality — High, Medium or Low.</p></a><a href="remove-pages" class="related-card"><h3>Remove Pages</h3><p>Delete the pages you don't need. No upload — processing happens on your device.</p></a>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2>Frequently Asked</h2>
+            <div class="faq-item"><h3>How do I permanently rotate a PDF?</h3><p>Choose an angle and click Rotate. The change is saved into the PDF structure — it is not just a viewer setting, so every PDF reader will show the pages rotated correctly.</p></div><div class="faq-item"><h3>Can I rotate only some pages?</h3><p>Yes. Leave the pages field blank to rotate the whole document, or type specific pages like "1, 3-5" to rotate only those.</p></div><div class="faq-item"><h3>My scan is sideways — will this fix it?</h3><p>Yes, that is the most common use. Rotate 90° or 270° and the pages will display upright in every reader, on every device.</p></div><div class="faq-item"><h3>Does rotating reduce quality?</h3><p>No. Rotation changes only the page orientation metadata — text, images and vectors stay exactly as they were.</p></div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="/">Merge PDF</a>
+                <a href="split-pdf">Split PDF</a>
+                <a href="compress-pdf">Compress PDF</a>
+                <a href="rotate-pdf">Rotate PDF</a>
+                <a href="remove-pages">Remove Pages</a>
+            </div>
+            <p>PDFMerge — Made for people who value privacy.</p>
+            <p class="footer-small">Not affiliated with Adobe, Smallpdf, or iLovePDF.</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="js/toolkit.js"></script>
+</body>
+</html>
