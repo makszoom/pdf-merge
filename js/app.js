@@ -191,8 +191,12 @@ mergeBtn.addEventListener('click', async () => {
 const PAYMENT_CONFIG = {
     WORKER_URL: 'https://pdfmerge-payment.makszoom85.workers.dev',
     TRC20_ADDRESS: 'TCQTHvLP1ZctspY8UEgsWjy8xqe5tUTtFc',
-    PRICE: 5
+    PLANS: {
+        unlimited: { price: 5,  storageKey: 'pdfmerge_unlocked',      label: 'Unlimited' },
+        pro:       { price: 9,  storageKey: 'pdfmerge_unlocked_pro',   label: 'Pro Batch' }
+    }
 };
+let currentPlan = 'unlimited';
 
 // Payment elements
 const paymentClose = document.getElementById('paymentClose');
@@ -202,8 +206,50 @@ const verifyBtn = document.getElementById('verifyBtn');
 const paymentStatus = document.getElementById('paymentStatus');
 
 // Paywall
-function showPaywall() { paywallModal.style.display = 'flex'; }
+function showPaywall(plan) {
+    if (plan) selectPlan(plan);
+    updatePaywallForPlan();
+    paywallModal.style.display = 'flex';
+}
 function closePaywall() { paywallModal.style.display = 'none'; }
+
+// Plan selection (Unlimited $5 / Pro $9)
+function selectPlan(plan) {
+    if (!PAYMENT_CONFIG.PLANS[plan]) plan = 'unlimited';
+    currentPlan = plan;
+    document.querySelectorAll('.plan-card').forEach(card => {
+        card.classList.toggle('plan-selected', card.dataset.plan === currentPlan);
+    });
+    updatePaywallForPlan();
+}
+
+function updatePaywallForPlan() {
+    const p = PAYMENT_CONFIG.PLANS[currentPlan];
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const priceTitle = document.getElementById('priceTitle');
+    const priceAmount = document.getElementById('priceAmount');
+    const priceDesc = document.getElementById('priceDesc');
+    if (modalTitle) modalTitle.textContent = currentPlan === 'pro' ? 'Unlock Pro Batch' : 'Unlock Unlimited Merges';
+    if (modalDesc) modalDesc.textContent = currentPlan === 'pro'
+        ? 'Batch processing: up to 30 files at once with ZIP download. Pay once — use forever.'
+        : 'You\'ve used all 5 free merges. Pay once — use forever.';
+    if (priceTitle) priceTitle.textContent = p.label + ' License';
+    if (priceAmount) priceAmount.textContent = '$' + p.price;
+    if (priceDesc) priceDesc.textContent = currentPlan === 'pro'
+        ? 'Batch up to 30 files + ZIP download. Includes unlimited single-file operations.'
+        : 'Unlimited merges forever. No subscription.';
+    // Refresh QR with correct amount
+    const qr = document.getElementById('paymentQR');
+    if (qr) {
+        qr.src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=tron:' +
+            PAYMENT_CONFIG.TRC20_ADDRESS + '%3Famount%3D' + p.price;
+    }
+}
+
+document.querySelectorAll('.plan-card').forEach(card => {
+    card.addEventListener('click', () => selectPlan(card.dataset.plan));
+});
 
 paywallModal.addEventListener('click', (e) => { if (e.target === paywallModal) closePaywall(); });
 if (paymentClose) paymentClose.addEventListener('click', closePaywall);
@@ -255,17 +301,18 @@ if (verifyBtn) {
         showStatus('<span class="payment-spinner"></span>Verifying transaction on blockchain...', 'loading');
 
         try {
+            const plan = PAYMENT_CONFIG.PLANS[currentPlan];
             const response = await fetch(PAYMENT_CONFIG.WORKER_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ txId })
+                body: JSON.stringify({ txId, amount: plan.price })
             });
 
             const data = await response.json();
 
             if (data.verified) {
                 // Success — unlock!
-                localStorage.setItem('pdfmerge_unlocked', 'true');
+                localStorage.setItem(plan.storageKey, 'true');
                 showStatus('✅ Payment verified! Unlimited merges activated.', 'success');
                 verifyBtn.textContent = '✓ Unlocked';
 
