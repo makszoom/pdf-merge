@@ -392,6 +392,78 @@ body {
 
 .price-desc { font-size: 14px; color: var(--muted); }
 
+/* Plan selection grid (Unlimited $5 / Pro $9) */
+.plan-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.plan-card {
+    cursor: pointer;
+    border: 2px solid var(--border, #e5e5e5);
+    opacity: 0.75;
+    transition: border-color 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.plan-card:hover { opacity: 1; }
+
+.plan-card.plan-selected {
+    border-color: var(--accent);
+    opacity: 1;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.plan-card .price-amount { font-size: 36px; }
+
+@media (max-width: 480px) {
+    .plan-grid { grid-template-columns: 1fr; }
+}
+
+/* Toolkit page options */
+.tool-options { margin-bottom: 20px; }
+
+.tool-options .opt-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.tool-options .opt-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border, #e5e5e5);
+    border-radius: var(--radius);
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.tool-options .opt-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.tool-options .opt-row label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* About text section (toolkit pages) */
+.about-text {
+    margin: 40px 0;
+    padding: 0 8px;
+}
+
+.about-text h2 { font-size: 20px; margin-bottom: 12px; }
+.about-text p { color: var(--muted); font-size: 15px; line-height: 1.6; }
+
 /* Payment network badge */
 .payment-network { margin-bottom: 20px; }
 
