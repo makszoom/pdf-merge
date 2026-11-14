@@ -25,6 +25,8 @@ OWNER, REPO, BRANCH = 'makszoom', 'pdf-merge', 'main'
 FILES = [
     'index.html', 'merge-pdf.html', 'split-pdf.html', 'compress-pdf.html',
     'rotate-pdf.html', 'remove-pages.html', 'privacy.html',
+    # старые дубли мержа: noindex + canonical на /merge-pdf, но description нужен
+    'combine-pdf.html', 'join-pdf.html', 'merge-pdf-files.html', 'pdf-merger-online.html',
     'merge-pdf-offline.html', 'merge-pdf-without-uploading.html',
     'merge-pdf-without-adobe.html', 'compress-pdf-offline.html', 'pdf-merge-no-signup.html',
     'sitemap.xml', 'robots.txt', 'manifest.json', 'icon.svg', 'CNAME',

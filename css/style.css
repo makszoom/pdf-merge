@@ -943,9 +943,12 @@ body {
     margin: 22px 0;
 }
 
-/* Кнопка призыва к действию: нужна и в hero, и внутри текста статьи,
-   поэтому класс объявлен глобально, а не только внутри .seo-content. */
-.cta-inline {
+/* Кнопка призыва к действию: нужна и в hero, и внутри текста статьи.
+   Внутри .seo-content правило `.seo-content a` (0,1,1) перебивало цвет кнопки (0,1,0),
+   из-за чего текст становился чёрным на чёрном фоне — кнопка выглядела пустым блоком.
+   Поэтому вариант с повышенной специфичностью прописан явно. */
+.cta-inline,
+.seo-content a.cta-inline {
     display: inline-block;
     background: var(--accent-bg);
     color: var(--accent-fg);
@@ -957,7 +960,11 @@ body {
     margin: 8px 0 22px;
 }
 
-.cta-inline:hover { opacity: 0.85; }
+.cta-inline:hover,
+.seo-content a.cta-inline:hover {
+    opacity: 0.85;
+    color: var(--accent-fg);
+}
 
 @media (max-width: 640px) {
     .seo-content h2 { font-size: 20px; }
