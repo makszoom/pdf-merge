@@ -26,6 +26,7 @@ FILES = [
     'index.html', 'merge-pdf.html', 'split-pdf.html', 'compress-pdf.html',
     'rotate-pdf.html', 'remove-pages.html', 'privacy.html',
     'merge-pdf-offline.html', 'merge-pdf-without-uploading.html',
+    'merge-pdf-without-adobe.html', 'compress-pdf-offline.html', 'pdf-merge-no-signup.html',
     'sitemap.xml', 'robots.txt', 'manifest.json', 'icon.svg', 'CNAME',
     'css/style.css', 'js/app.js',
 ]

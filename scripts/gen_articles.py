@@ -162,6 +162,191 @@ ARTICLES = [
              'which is why the distinction is easy to miss.'),
         ],
     ),
+    dict(
+        slug='merge-pdf-without-adobe',
+        title='Merge PDF Without Adobe: What Works Instead',
+        desc=('Adobe Reader cannot merge and Acrobat needs a paid plan. The free options on Windows, Mac and in the '
+              'browser, and the jobs where Acrobat still earns its price.'),
+        h1='Merge PDF Without Adobe',
+        h1b='What Works Instead',
+        sub='Why the free Reader cannot merge, what is built into each system, and the cases where paying Adobe is still the right call.',
+        sections=[
+            ('The Reader trap',
+             ['Adobe Acrobat Reader is free, and it will not combine two PDFs. The menu item exists in some builds '
+              'and does nothing useful without a subscription, which is where a lot of people give up and assume '
+              'merging is a paid feature everywhere.',
+              'Merging lives in Acrobat Standard and Acrobat Pro, both subscription products. If you already pay for '
+              'Acrobat at work, use it. If you need to merge four invoices once, paying a monthly fee is a poor trade.']),
+            ('What is already on the machine',
+             ['On macOS, Preview merges PDFs with no extra software. Open the first document, show the sidebar, drag '
+              'the rest in, then save. It handles a few dozen files before the thumbnail dragging becomes tedious.',
+              'On Windows there is no built-in merger. Printing to Microsoft Print to PDF creates one file per print '
+              'job, so it cannot combine documents. The usual answer is PDFsam Basic, free and open source, which asks '
+              'for Java first. LibreOffice Draw opens PDFs and can export a merged file, but it treats a PDF as an '
+              'editable drawing, and complicated layouts will shift.']),
+            ('Merging in the browser',
+             ['A browser tool avoids the install and the subscription. The page loads once and then does the merge in '
+              'the tab, so the documents stay on your machine.',
+              '<a class="cta-inline" href="/">Merge a PDF in the browser, free</a>',
+              'This is the shortest path on a locked-down laptop or a Chromebook. It is not a replacement for Acrobat '
+              'when the job involves more than combining files, and the next section is about exactly that.']),
+            ('Where Acrobat is genuinely better',
+             ['Three jobs come to mind, and no browser tool I know of does them well. Optical character recognition on '
+              'a scanned document: Acrobat reads the text layer and makes it searchable, which a browser tab cannot '
+              'match for large files. Fillable forms and digital signatures: Acrobat handles certificate-based signing '
+              'and form fields that other tools flatten or drop. PDF/A and accessibility remediation: if you submit to '
+              'a court, a regulator or an archive with format requirements, Acrobat validates against the profile.',
+              'If your work is one of those, the subscription is not the problem to solve. If your work is combining '
+              'documents, you are paying for a printing press to staple two pages together.']),
+            ('The short comparison',
+             ['<table><thead><tr><th>Option</th><th>Cost</th><th>Works offline</th><th>Good for</th></tr></thead><tbody>'
+              '<tr><td>Acrobat Pro</td><td>Subscription</td><td>Yes</td><td>OCR, forms, signing, PDF/A</td></tr>'
+              '<tr><td>Preview on Mac</td><td>Free, built in</td><td>Yes</td><td>A few files, quick jobs</td></tr>'
+              '<tr><td>PDFsam Basic</td><td>Free, open source</td><td>Yes</td><td>Many files, splitting, rotation</td></tr>'
+              '<tr><td>Browser tool</td><td>Free tier, then paid once</td><td>After first load</td><td>No install, file stays local</td></tr>'
+              '</tbody></table>']),
+        ],
+        faqs=[
+            ('Can Adobe Acrobat Reader merge PDF files for free?',
+             'No. Acrobat Reader opens and annotates PDFs, but combining files requires Acrobat Standard or Pro, both '
+             'paid subscriptions.'),
+            ('What is the easiest free way to merge PDFs on Windows?',
+             'Install PDFsam Basic, which is free and open source, or use a browser tool that needs no install. Windows '
+             'itself has no built-in merger.'),
+            ('Can I merge PDFs on Mac without paying?',
+             'Yes. Preview is built into macOS and merges files: open the first PDF, show the sidebar, drag the other '
+             'documents into it, then save.'),
+            ('Does merging in the browser lose quality?',
+             'No. The pages are copied into a new document rather than re-rendered, so text stays selectable and images '
+             'keep their original resolution.'),
+            ('When should I pay for Acrobat instead?',
+             'When the job needs OCR on scans, fillable forms, certificate-based signatures, or PDF/A compliance for a '
+             'court or archive. For simply combining documents, a free tool does the same thing.'),
+        ],
+    ),
+    dict(
+        slug='compress-pdf-offline',
+        title='Compress PDF Offline: Mac, Windows and Android',
+        desc=('How to shrink a PDF without uploading it, what each system gives you for free, and the catch that makes '
+              'browser compressors lose the text layer.'),
+        h1='Compress PDF Offline',
+        h1b='Without Uploading It',
+        sub='Two different compression methods, the built-in option on a Mac, what Windows makes you install, and the price a browser compressor pays.',
+        sections=[
+            ('Two methods, and only one keeps the text',
+             ['Compressors work in one of two ways and the difference decides whether your document survives intact.',
+              'The first method rewrites the file structure: it removes duplicate objects, drops unused fonts, '
+              'downsamples oversized images and recompresses streams. The text layer stays exactly as it was. Acrobat '
+              'and Ghostscript both do this, and so do the command line tools on Linux.',
+              'The second method renders each page to an image and builds a new PDF from those images. Compression '
+              'ratios look impressive, but the text is gone. It is a picture of text now, so you cannot select it, '
+              'search it, or copy a number out of an invoice.']),
+            ('On a Mac',
+             ['Preview compresses through the Quartz filter. Open the PDF, choose File then Export, pick "Reduce File '
+              'Size" from the Quartz filter dropdown and save. It keeps the text layer and works offline. The reduction '
+              'is modest compared with what a rasterizing tool reports, which is the trade you want for a document you '
+              'still need to read.',
+              'For more control, ColorSync Utility lets you build a custom filter with a specific image resolution. It '
+              'is a fiddly dialog, and worth it only if you compress the same kind of document regularly.']),
+            ('On Windows',
+             ['Windows has nothing built in. There is no system dialog that shrinks a PDF. Two practical options: '
+              'Ghostscript, which is free and runs from the command line, and PDFsam Enhanced, which is paid. Ghostscript '
+              'with the -dPDFSETTINGS=/ebook flag gets a text layer and reasonable image quality, and it takes about '
+              'thirty seconds to learn.']),
+            ('On Android',
+             ['Most Android "PDF compressor" apps upload the file to a server, because phone CPUs are slow at this. '
+              'Read the permissions and the privacy policy before installing one. A browser compressor avoids the app '
+              'install and keeps the file on the device, at the cost of speed on large documents.']),
+            ('What a browser compressor does here',
+             ['PDFMerge compresses by rendering pages, which is the same approach most online compressors use. That '
+              'means the output is smaller and the text layer is lost. If you need the text to stay selectable, use the '
+              'Mac Export route or Ghostscript instead, and treat this tool as the option for scans and image-heavy '
+              'documents.',
+              '<a class="cta-inline" href="compress-pdf">Compress a PDF in the browser</a>',
+              'Being straight about that matters more than the compression ratio. A PDF whose text you cannot search '
+              'has failed at the thing a PDF is for.']),
+        ],
+        faqs=[
+            ('How do I compress a PDF offline on a Mac?',
+             'Open it in Preview, choose File then Export, and select "Reduce File Size" in the Quartz filter dropdown. '
+             'It works without an internet connection and keeps the text selectable.'),
+            ('Is there a built-in PDF compressor in Windows?',
+             'No. Windows has no system tool for shrinking PDFs. Ghostscript is the free option, and the command '
+             'line flag -dPDFSETTINGS=/ebook gives a sensible balance.'),
+            ('Why is the text not selectable after compression?',
+             'Because that compressor rebuilt the pages as images. It is the same method most online compressors use, '
+             'and it trades the text layer for a smaller file. Structural compressors such as Ghostscript keep the text.'),
+            ('How much smaller will my PDF get?',
+             'Scanned and image-heavy documents often drop by half or more. A text-only PDF is already efficient, so '
+             'expect little gain without rasterizing it.'),
+            ('Does compressing offline produce the same result as online?',
+             'The output depends on the method, not on where it runs. A rasterizing compressor gives the same result in '
+             'a browser tab as on a server. The difference is that the file never leaves your machine.'),
+        ],
+    ),
+    dict(
+        slug='pdf-merge-no-signup',
+        title='PDF Merge With No Sign-Up: What Needs an Account',
+        desc=('Which PDF mergers ask for an account and what they want it for. What still works without registering, '
+              'and when creating one is actually worth it.'),
+        h1='Merge PDFs With No Sign-Up',
+        h1b='And What the Account Is Really For',
+        sub='Why free tools ask for an email, what you give up by refusing, and the mergers that work without any account at all.',
+        sections=[
+            ('Why a merger wants your email',
+             ['Three reasons, and they are not equally honest. The first is billing: a tool with a paid tier needs an '
+              'identity to attach it to. The second is usage limits: an account is how a free allowance gets counted, '
+              'so you get five merges a month instead of five ever. The third is marketing, where the account exists so '
+              'there is an address to email later.',
+              'None of these is sinister, and none of them is about merging files. That is the part worth noticing: the '
+              'account is there for the business, not for the task.']),
+            ('What you give up by refusing',
+             ['Usually: a file history, batch jobs above a small limit, and cloud storage for the results. If you merge '
+              'one document a month, none of that matters. If you process invoices weekly, the batch limit is the real '
+              'cost, and the account starts to look reasonable.',
+              'You also lose the ability to complain. Support channels tend to require a login, which is fair enough.']),
+            ('Working without an account',
+             ['<strong>System tools.</strong> Preview on macOS merges with no account because there is nobody to ask. '
+              'PDFsam Basic on Windows and Linux is the same: a download, not a registration.',
+              '<strong>Browser tools.</strong> A page that runs the merge in the tab has no reason to know who you are. '
+              'PDFMerge takes that position: five merges free, no email, no account, and a one-time $5 if you want '
+              'unlimited. There is no login screen to skip because there is no login.',
+              '<a class="cta-inline" href="/">Try it without signing up</a>',
+              '<strong>Command line.</strong> qpdf and pdftk merge files locally and have never asked anyone for an '
+              'address.']),
+            ('When the account is worth it',
+             ['If the tool does something a free one does not, the account is the price of that feature rather than a '
+              'toll. Smallpdf and iLovePDF both handle conversions and OCR that a local tool will not, and both want an '
+              'account for the paid tier. That is a normal trade.',
+              'The bad version is a site that requires registration to merge two files and offers nothing a browser tab '
+              'cannot do. Those exist in numbers, and they are the reason the phrase "no sign up" gets searched at all.']),
+            ('The comparison',
+             ['<table><thead><tr><th>Tool</th><th>Account</th><th>Limit without paying</th></tr></thead><tbody>'
+              '<tr><td>Preview (macOS)</td><td>None</td><td>None, it is part of the system</td></tr>'
+              '<tr><td>PDFsam Basic</td><td>None</td><td>None</td></tr>'
+              '<tr><td>PDFMerge</td><td>None</td><td>5 merges, then $5 once</td></tr>'
+              '<tr><td>Smallpdf</td><td>Required for paid features</td><td>2 documents a day</td></tr>'
+              '<tr><td>iLovePDF</td><td>Required for paid features</td><td>Daily task limits</td></tr>'
+              '</tbody></table>']),
+        ],
+        faqs=[
+            ('Can I merge PDFs without creating an account?',
+             'Yes. Preview on macOS and PDFsam Basic on Windows need no account. Browser tools that process the file '
+             'locally also have no reason to ask, since there is nothing to bill per user.'),
+            ('Why do free PDF tools require registration?',
+             'Usually to count a usage allowance or to have an address to market to. Registration rarely has anything '
+             'to do with the merge itself.'),
+            ('Is it safe to give my email to a PDF site?',
+             'Consider what the site does with files first. A site that uploads documents keeps a copy, and an email '
+             'links that activity to a person. A site that processes locally has less to link.'),
+            ('What is the difference between no sign-up and no upload?',
+             'Sign-up is about identity, upload is about where the file goes. A tool can skip the account and still '
+             'upload your document, and plenty do. Check the network tab, not the marketing.'),
+            ('Do I lose quality by merging without an account?',
+             'No. The account has no effect on the output. A merge copies pages into a new document, so quality is '
+             'identical whether you registered or not.'),
+        ],
+    ),
 ]
 
 TPL = '''<!DOCTYPE html>
@@ -243,6 +428,16 @@ RELATED = [
     ('remove-pages', 'Remove Pages', 'Delete pages you do not need.'),
 ]
 
+# Статьи ссылаются друг на друга, а не на инструменты: перекрёстные ссылки внутри
+# кластера помогают Google связать материалы по теме и держат посетителя на сайте.
+GUIDES = [
+    ('merge-pdf-offline', 'Merge PDF Offline', 'Windows, Mac and browser options compared.'),
+    ('merge-pdf-without-uploading', 'Merge Without Uploading', 'How to check any merger before you drop a file.'),
+    ('merge-pdf-without-adobe', 'Merge Without Adobe', 'What works instead, and where Acrobat still wins.'),
+    ('compress-pdf-offline', 'Compress PDF Offline', 'Two methods, and which one keeps the text.'),
+    ('pdf-merge-no-signup', 'No Sign-Up Merging', 'What the account is really for.'),
+]
+
 
 def build(art):
     body_parts = []
@@ -261,7 +456,7 @@ def build(art):
 
     cards = '\n'.join(
         '                <a href="{}" class="related-card"><h3>{}</h3><p>{}</p></a>'.format(slug, name, text)
-        for slug, name, text in RELATED)
+        for slug, name, text in [(s, n, t) for s, n, t in GUIDES if s != art['slug']])
 
     # HowTo собираем из инструкций внутри секций: берём шаги из первой секции-инструкции, если есть
     howto = {
