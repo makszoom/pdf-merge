@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compress PDF Offline: Mac, Windows and Android</title>
+    <meta name="description" content="How to shrink a PDF without uploading it, what each system gives you for free, and the catch that makes browser compressors lose the text layer.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📄%3C/text%3E%3C/svg%3E">
+    <link rel="manifest" href="manifest.json">
+    <link rel="canonical" href="https://pdfmerge.dev/compress-pdf-offline">
+    <meta property="og:url" content="https://pdfmerge.dev/compress-pdf-offline">
+    <meta property="og:title" content="Compress PDF Offline: Mac, Windows and Android">
+    <meta property="og:description" content="How to shrink a PDF without uploading it, what each system gives you for free, and the catch that makes browser compressors lose the text layer.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Compress PDF Offline: Mac, Windows and Android">
+    <meta name="twitter:description" content="How to shrink a PDF without uploading it, what each system gives you for free, and the catch that makes browser compressors lose the text layer.">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Compress PDF Offline: Mac, Windows and Android",
+  "description": "How to shrink a PDF without uploading it, what each system gives you for free, and the catch that makes browser compressors lose the text layer.",
+  "url": "https://pdfmerge.dev/compress-pdf-offline",
+  "datePublished": "2026-11-14",
+  "dateModified": "2026-11-14",
+  "author": {
+    "@type": "Organization",
+    "name": "PDFMerge"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "PDFMerge"
+  }
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I compress a PDF offline on a Mac?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open it in Preview, choose File then Export, and select \"Reduce File Size\" in the Quartz filter dropdown. It works without an internet connection and keeps the text selectable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a built-in PDF compressor in Windows?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Windows has no system tool for shrinking PDFs. Ghostscript is the free option, and the command line flag -dPDFSETTINGS=/ebook gives a sensible balance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is the text not selectable after compression?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because that compressor rebuilt the pages as images. It is the same method most online compressors use, and it trades the text layer for a smaller file. Structural compressors such as Ghostscript keep the text."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much smaller will my PDF get?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Scanned and image-heavy documents often drop by half or more. A text-only PDF is already efficient, so expect little gain without rasterizing it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does compressing offline produce the same result as online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The output depends on the method, not on where it runs. A rasterizing compressor gives the same result in a browser tab as on a server. The difference is that the file never leaves your machine."
+      }
+    }
+  ]
+}
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">📄 PDFMerge</div>
+            <div class="badge">Free • No Upload • Browser-Only</div>
+        </header>
+
+        <section class="hero">
+            <h1>Compress PDF Offline<br><span class="highlight">Without Uploading It</span></h1>
+            <p class="subtitle">Two different compression methods, the built-in option on a Mac, what Windows makes you install, and the price a browser compressor pays.</p>
+            <a class="cta-inline" href="/" style="margin-top:22px">Merge a PDF free, no signup</a>
+        </section>
+
+        <section class="seo-content">
+            <h2>Two methods, and only one keeps the text</h2>
+            <p>Compressors work in one of two ways and the difference decides whether your document survives intact.</p>
+            <p>The first method rewrites the file structure: it removes duplicate objects, drops unused fonts, downsamples oversized images and recompresses streams. The text layer stays exactly as it was. Acrobat and Ghostscript both do this, and so do the command line tools on Linux.</p>
+            <p>The second method renders each page to an image and builds a new PDF from those images. Compression ratios look impressive, but the text is gone. It is a picture of text now, so you cannot select it, search it, or copy a number out of an invoice.</p>
+            <h2>On a Mac</h2>
+            <p>Preview compresses through the Quartz filter. Open the PDF, choose File then Export, pick "Reduce File Size" from the Quartz filter dropdown and save. It keeps the text layer and works offline. The reduction is modest compared with what a rasterizing tool reports, which is the trade you want for a document you still need to read.</p>
+            <p>For more control, ColorSync Utility lets you build a custom filter with a specific image resolution. It is a fiddly dialog, and worth it only if you compress the same kind of document regularly.</p>
+            <h2>On Windows</h2>
+            <p>Windows has nothing built in. There is no system dialog that shrinks a PDF. Two practical options: Ghostscript, which is free and runs from the command line, and PDFsam Enhanced, which is paid. Ghostscript with the -dPDFSETTINGS=/ebook flag gets a text layer and reasonable image quality, and it takes about thirty seconds to learn.</p>
+            <h2>On Android</h2>
+            <p>Most Android "PDF compressor" apps upload the file to a server, because phone CPUs are slow at this. Read the permissions and the privacy policy before installing one. A browser compressor avoids the app install and keeps the file on the device, at the cost of speed on large documents.</p>
+            <h2>What a browser compressor does here</h2>
+            <p>PDFMerge compresses by rendering pages, which is the same approach most online compressors use. That means the output is smaller and the text layer is lost. If you need the text to stay selectable, use the Mac Export route or Ghostscript instead, and treat this tool as the option for scans and image-heavy documents.</p>
+            <p><a class="cta-inline" href="compress-pdf">Compress a PDF in the browser</a></p>
+            <p>Being straight about that matters more than the compression ratio. A PDF whose text you cannot search has failed at the thing a PDF is for.</p>
+        </section>
+
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I compress a PDF offline on a Mac?</h3>
+                <p>Open it in Preview, choose File then Export, and select "Reduce File Size" in the Quartz filter dropdown. It works without an internet connection and keeps the text selectable.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is there a built-in PDF compressor in Windows?</h3>
+                <p>No. Windows has no system tool for shrinking PDFs. Ghostscript is the free option, and the command line flag -dPDFSETTINGS=/ebook gives a sensible balance.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why is the text not selectable after compression?</h3>
+                <p>Because that compressor rebuilt the pages as images. It is the same method most online compressors use, and it trades the text layer for a smaller file. Structural compressors such as Ghostscript keep the text.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How much smaller will my PDF get?</h3>
+                <p>Scanned and image-heavy documents often drop by half or more. A text-only PDF is already efficient, so expect little gain without rasterizing it.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does compressing offline produce the same result as online?</h3>
+                <p>The output depends on the method, not on where it runs. A rasterizing compressor gives the same result in a browser tab as on a server. The difference is that the file never leaves your machine.</p>
+            </div>
+        </section>
+
+        <section class="related">
+            <h2>Other PDF tools</h2>
+            <div class="related-grid">
+                <a href="merge-pdf-offline" class="related-card"><h3>Merge PDF Offline</h3><p>Windows, Mac and browser options compared.</p></a>
+                <a href="merge-pdf-without-uploading" class="related-card"><h3>Merge Without Uploading</h3><p>How to check any merger before you drop a file.</p></a>
+                <a href="merge-pdf-without-adobe" class="related-card"><h3>Merge Without Adobe</h3><p>What works instead, and where Acrobat still wins.</p></a>
+                <a href="pdf-merge-no-signup" class="related-card"><h3>No Sign-Up Merging</h3><p>What the account is really for.</p></a>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="/">Merge PDF</a>
+                <a href="split-pdf">Split PDF</a>
+                <a href="compress-pdf">Compress PDF</a>
+                <a href="rotate-pdf">Rotate PDF</a>
+                <a href="remove-pages">Remove Pages</a>
+            </div>
+            <p>PDFMerge — Made for people who value privacy.</p>
+            <p class="footer-small">Not affiliated with Adobe, Smallpdf, or iLovePDF. Last checked 14 November 2026.</p>
+        </footer>
+    </div>
+</body>
+</html>
