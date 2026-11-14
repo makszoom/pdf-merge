@@ -943,7 +943,9 @@ body {
     margin: 22px 0;
 }
 
-.seo-content .cta-inline {
+/* Кнопка призыва к действию: нужна и в hero, и внутри текста статьи,
+   поэтому класс объявлен глобально, а не только внутри .seo-content. */
+.cta-inline {
     display: inline-block;
     background: var(--accent-bg);
     color: var(--accent-fg);
@@ -955,7 +957,7 @@ body {
     margin: 8px 0 22px;
 }
 
-.seo-content .cta-inline:hover { opacity: 0.85; }
+.cta-inline:hover { opacity: 0.85; }
 
 @media (max-width: 640px) {
     .seo-content h2 { font-size: 20px; }
