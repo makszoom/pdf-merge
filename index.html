@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Merge — Merge PDF Files Online (No Upload, 100% Browser)</title>
+    <meta name="description" content="Merge PDF files online for free. No upload to server — 100% browser-side. Fast, private, secure. Lifetime $5 for unlimited merges.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📄%3C/text%3E%3C/svg%3E">
+    <link rel="manifest" href="manifest.json">
+    <link rel="canonical" href="https://pdfmerge.dev/">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PDFMerge",
+    "url": "https://pdfmerge.dev/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any modern web browser",
+    "description": "Merge, split, compress, rotate and remove pages from PDF files in the browser. Files are never uploaded to a server.",
+    "offers": {
+        "@type": "Offer",
+        "price": "5.00",
+        "priceCurrency": "USD",
+        "description": "Five operations free, then a one-time $5 licence for unlimited use. No subscription."
+    },
+    "featureList": [
+        "Merge several PDFs into one file",
+        "Split a PDF into separate documents",
+        "Compress PDF size",
+        "Rotate pages",
+        "Remove selected pages",
+        "Files are processed in the browser, never uploaded"
+    ],
+    "isAccessibleForFree": true
+}
+    </script>
+    <meta property="og:url" content="https://pdfmerge.dev/">
+    <meta property="og:title" content="PDF Merge — Merge PDF Files Online (No Upload, 100% Browser)">
+    <meta property="og:description" content="Merge PDF files online for free. No upload to server — 100% browser-side. Fast, private, secure. Lifetime $5 for unlimited merges.">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">📄 PDFMerge</div>
+            <div class="badge">Free • No Upload • Browser-Only</div>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1>Merge PDF Files<br><span class="highlight">In Your Browser</span></h1>
+            <p class="subtitle">No upload to server. No registration. Your documents never leave your device.</p>
+        </section>
+
+        <!-- Main Tool -->
+        <section class="tool">
+            <!-- Drag & Drop Zone -->
+            <div class="drop-zone" id="dropZone">
+                <div class="drop-icon">📁</div>
+                <p class="drop-text">Drag & drop PDF files here</p>
+                <p class="drop-sub">or <span class="link" id="filePicker">click to select</span></p>
+                <input type="file" id="fileInput" multiple accept=".pdf" hidden>
+            </div>
+
+            <!-- File List -->
+            <div class="file-list" id="fileList" style="display: none;">
+                <div class="file-list-header">
+                    <span>Files (<span id="fileCount">0</span>)</span>
+                    <button class="btn-text" id="clearAll">Clear all</button>
+                </div>
+                <div class="files" id="files"></div>
+            </div>
+
+            <!-- Merge Button -->
+            <button class="btn-primary" id="mergeBtn" disabled>
+                <span class="btn-icon">⬇️</span>
+                Merge & Download PDF
+            </button>
+
+            <!-- Progress -->
+            <div class="progress" id="progress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">Merging...</p>
+            </div>
+
+            <!-- Counter -->
+            <div class="counter" id="counter">
+                Free merges left: <span id="mergesLeft">5</span>/5
+            </div>
+        </section>
+
+        <!-- Payment Modal -->
+        <div class="modal" id="paywallModal" style="display: none;">
+            <div class="modal-content payment-modal">
+                <button class="payment-close" id="paymentClose">✕</button>
+                <div class="modal-icon">🔒</div>
+                <h2 id="modalTitle">Unlock Unlimited Merges</h2>
+                <p class="modal-desc" id="modalDesc">You've used all 5 free merges. Pay once — use forever.</p>
+
+                <div class="plan-grid">
+                    <div class="price-card plan-card plan-selected" data-plan="unlimited">
+                        <div class="price-title" id="priceTitle">Unlimited License</div>
+                        <div class="price-amount" id="priceAmount">$5</div>
+                        <div class="price-desc" id="priceDesc">Unlimited merges forever. No subscription.</div>
+                    </div>
+                    <div class="price-card plan-card" data-plan="pro">
+                        <div class="price-title">Pro Batch</div>
+                        <div class="price-amount">$9</div>
+                        <div class="price-desc">Batch up to 30 files + ZIP. Includes unlimited.</div>
+                    </div>
+                </div>
+
+                <!-- Payment Network -->
+                <div class="payment-network">
+                    <span class="network-badge">⚡ USDT TRC-20 (Tron)</span>
+                </div>
+
+                <!-- QR Code -->
+                <div class="qr-section">
+                    <img
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=tron:TCQTHvLP1ZctspY8UEgsWjy8xqe5tUTtFc%3Famount%3D5"
+                        alt="Payment QR Code"
+                        class="payment-qr"
+                        id="paymentQR"
+                    />
+                    <p class="qr-hint">Scan with TronLink, Trust Wallet, or Bybit</p>
+                </div>
+
+                <!-- Address Copy -->
+                <div class="address-section">
+                    <label class="payment-label">Or copy address manually:</label>
+                    <div class="address-box">
+                        <input
+                            type="text"
+                            id="paymentAddress"
+                            value="TCQTHvLP1ZctspY8UEgsWjy8xqe5tUTtFc"
+                            readonly
+                        />
+                        <button class="btn-copy" id="copyBtn">Copy</button>
+                    </div>
+                </div>
+
+                <!-- TXID Input -->
+                <div class="txid-section">
+                    <label class="payment-label">After sending, paste your Transaction ID (TXID):</label>
+                    <div class="txid-input-group">
+                        <input
+                            type="text"
+                            id="txidInput"
+                            placeholder="Paste TXID here (64 characters)"
+                            maxlength="64"
+                            spellcheck="false"
+                        />
+                        <button class="btn-verify" id="verifyBtn">
+                            Verify
+                        </button>
+                    </div>
+                    <div id="paymentStatus" class="payment-status"></div>
+                </div>
+
+                <p class="payment-note">⏱ Wait 30-60 seconds after sending before verifying.</p>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <section class="features">
+            <h2>Why PDFMerge?</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Private</h3>
+                    <p>Files never leave your browser. No server, no upload, no data collection.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant</h3>
+                    <p>No waiting for upload. Merge happens locally in milliseconds.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <h3>Lifetime $5</h3>
+                    <p>No monthly subscription. Pay once, use forever. Unlimited merges.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h3>Works Everywhere</h3>
+                    <p>Any browser, any device. No installation needed.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools (toolkit internal linking) -->
+        <section class="related">
+            <h2>More PDF Tools</h2>
+            <div class="related-grid">
+                <a href="split-pdf" class="related-card">
+                    <h3>Split PDF</h3>
+                    <p>Extract pages or page ranges</p>
+                </a>
+                <a href="compress-pdf" class="related-card">
+                    <h3>Compress PDF</h3>
+                    <p>Reduce file size, 3 quality presets</p>
+                </a>
+                <a href="rotate-pdf" class="related-card">
+                    <h3>Rotate PDF</h3>
+                    <p>Fix sideways scans, 90/180/270°</p>
+                </a>
+                <a href="remove-pages" class="related-card">
+                    <h3>Remove Pages</h3>
+                    <p>Delete unneeded pages instantly</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq">
+            <h2>Frequently Asked</h2>
+            <div class="faq-item">
+                <h3>Is it safe to merge PDF here?</h3>
+                <p>Yes. Unlike Smallpdf or iLovePDF, we don't upload your files to any server. Everything happens in your browser — your documents never leave your device.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why only 5 free merges?</h3>
+                <p>Running a tool costs money. 5 merges let you try everything. If you need more — $5 lifetime unlocks unlimited merges. No subscription, no recurring charges.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I pay?</h3>
+                <p>We accept USDT (TRC-20) — a stable cryptocurrency. After payment, your browser is instantly unlocked. No account needed.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What file sizes are supported?</h3>
+                <p>Up to 50 MB per file, up to 20 files at once on the free plan. Pro ($9 lifetime) unlocks batch processing of up to 30 files per operation with ZIP download for the results.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="/">Merge PDF</a>
+                <a href="split-pdf">Split PDF</a>
+                <a href="compress-pdf">Compress PDF</a>
+                <a href="rotate-pdf">Rotate PDF</a>
+                <a href="remove-pages">Remove Pages</a>
+            </div>
+            <p>PDFMerge — Made for people who value privacy.</p>
+            <p class="footer-small">Not affiliated with Adobe, Smallpdf, or iLovePDF.</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

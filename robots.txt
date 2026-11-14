@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pdfmerge.dev/sitemap.xml

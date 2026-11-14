@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compress PDF — Reduce PDF File Size Online Free (No Upload)</title>
+    <meta name="description" content="Compress PDF files online for free. Reduce file size in your browser with 3 quality presets — no upload, no watermark, 100% private.">
+    <link rel="canonical" href="https://pdfmerge.dev/compress-pdf">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📄%3C/text%3E%3C/svg%3E">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to Compress a PDF Online", "totalTime": "PT1M", "step": [{"@type": "HowToStep", "position": 1, "name": "Select PDF", "text": "Drag and drop the PDF you want to compress."}, {"@type": "HowToStep", "position": 2, "name": "Pick Quality", "text": "High keeps near-original clarity, Medium and Low give smaller files."}, {"@type": "HowToStep", "position": 3, "name": "Download", "text": "Click Compress and save the smaller PDF."}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much smaller will my PDF be?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the content. Scanned documents and image-heavy PDFs often shrink 50-80%. Text-only PDFs may shrink less because they were already efficient."}}, {"@type": "Question", "name": "Why does compression rasterize pages?", "acceptedAnswer": {"@type": "Answer", "text": "This tool renders each page to a JPEG image and rebuilds the PDF — the same approach used by most online compressors. Text stays readable at High quality, but is no longer selectable after compression."}}, {"@type": "Question", "name": "Is there a file size limit?", "acceptedAnswer": {"@type": "Answer", "text": "The free plan handles files up to ~50 MB. Compression runs locally, so there is no server quota — the limit is your browser memory."}}, {"@type": "Question", "name": "Will compression add a watermark?", "acceptedAnswer": {"@type": "Answer", "text": "No. Never. The output is a clean PDF with no watermarks, no branding and no hidden pages."}}]}</script>
+</head>
+<body data-tool="compress">
+    <div class="container">
+        <header class="header">
+            <a href="/" class="logo" style="text-decoration:none;color:inherit;">📄 PDFMerge</a>
+            <div class="badge">Free • No Upload • Browser-Only</div>
+        </header>
+
+        <section class="hero">
+            <h1>Compress PDF <span class="highlight">In Your Browser</span></h1>
+            <p class="subtitle">Shrink PDF file size without uploading. Choose quality — High, Medium or Low.</p>
+        </section>
+
+        <section class="tool">
+            <div class="drop-zone" id="dropZone">
+                <div class="drop-icon">📁</div>
+                <p class="drop-text">Drag & drop PDF files here</p>
+                <p class="drop-sub">or <span class="link" id="filePicker">click to select</span> — batch up to 30 files with Pro</p>
+                <input type="file" id="fileInput" multiple accept=".pdf" hidden>
+            </div>
+
+            <div class="file-list" id="fileList" style="display: none;">
+                <div class="file-list-header">
+                    <span>Files (<span id="fileCount">0</span>)</span>
+                    <button class="btn-text" id="clearAll">Clear all</button>
+                </div>
+                <div class="files" id="files"></div>
+            </div>
+
+            <div id="toolOptions" class="tool-options"></div>
+
+            <button class="btn-primary" id="runBtn" disabled>
+                <span class="btn-icon">⬇️</span>
+                Compress & Download
+            </button>
+
+            <div class="progress" id="progress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">Processing...</p>
+            </div>
+
+            <div class="counter" id="counter"></div>
+        </section>
+
+        <section class="about-text">
+            <h2>About this tool</h2>
+            <p>Three quality presets: <strong>High</strong> (recommended, keeps text crisp), <strong>Medium</strong> and <strong>Low</strong> for maximum size reduction.</p>
+        </section>
+
+        <section class="features">
+            <h2>Why PDFMerge Tools?</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Private</h3>
+                    <p>Files never leave your browser. No server, no upload, no data collection.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant</h3>
+                    <p>No upload wait. Processing happens locally in seconds.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <h3>Free to Try</h3>
+                    <p>5 free operations. $5 lifetime for unlimited, $9 for batch Pro.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h3>Works Everywhere</h3>
+                    <p>Any modern browser, any device. No installation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="related">
+            <h2>More PDF Tools</h2>
+            <div class="related-grid">
+                <a href="/" class="related-card">
+                    <h3>Merge PDF</h3>
+                    <p>Combine multiple PDFs into one file</p>
+                </a>
+                <a href="split-pdf" class="related-card"><h3>Split PDF</h3><p>Extract pages from a PDF instantly. No upload — your document never leaves your device.</p></a><a href="rotate-pdf" class="related-card"><h3>Rotate PDF</h3><p>Turn pages 90°, 180° or 270°. Fix sideways scans without uploading anything.</p></a><a href="remove-pages" class="related-card"><h3>Remove Pages</h3><p>Delete the pages you don't need. No upload — processing happens on your device.</p></a>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2>Frequently Asked</h2>
+            <div class="faq-item"><h3>How much smaller will my PDF be?</h3><p>It depends on the content. Scanned documents and image-heavy PDFs often shrink 50-80%. Text-only PDFs may shrink less because they were already efficient.</p></div><div class="faq-item"><h3>Why does compression rasterize pages?</h3><p>This tool renders each page to a JPEG image and rebuilds the PDF — the same approach used by most online compressors. Text stays readable at High quality, but is no longer selectable after compression.</p></div><div class="faq-item"><h3>Is there a file size limit?</h3><p>The free plan handles files up to ~50 MB. Compression runs locally, so there is no server quota — the limit is your browser memory.</p></div><div class="faq-item"><h3>Will compression add a watermark?</h3><p>No. Never. The output is a clean PDF with no watermarks, no branding and no hidden pages.</p></div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="/">Merge PDF</a>
+                <a href="split-pdf">Split PDF</a>
+                <a href="compress-pdf">Compress PDF</a>
+                <a href="rotate-pdf">Rotate PDF</a>
+                <a href="remove-pages">Remove Pages</a>
+            </div>
+            <p>PDFMerge — Made for people who value privacy.</p>
+            <p class="footer-small">Not affiliated with Adobe, Smallpdf, or iLovePDF.</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="js/toolkit.js"></script>
+</body>
+</html>

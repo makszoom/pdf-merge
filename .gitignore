@@ -1,0 +1,12 @@
+# Секреты
+.env
+
+# Резервные копии и артефакты деплоя
+backup-*/
+test*.pdf
+worker-code.txt
+worker-code-fixed.txt
+*.log
+
+# Зависимости
+node_modules/
