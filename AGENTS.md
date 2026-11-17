@@ -1,7 +1,7 @@
 ---
 name: pdf-merge
-version: 2.0.0
-updated: 2026-09-08
+version: 2.1.0
+updated: 2026-11-18 (SEO workspace + замер GSC)
 ---
 
 # AGENTS.md — pdf-merge
@@ -41,8 +41,10 @@ pdf-merge/
 ├── scripts/
 │   ├── gen_toolkit_pages.py # Генератор 4 toolkit-страниц
 │   └── gen_redirects.py     # Генератор redirect-страниц
-├── sitemap.xml             # 6 URLs: / + merge-pdf + 4 toolkit
+├── sitemap.xml             # 8 URLs (после 14.11: + merge-pdf-offline, compress-pdf-offline и др.)
 ├── robots.txt              # Allow: / + Sitemap directive
+├── seo/                    # ★ рабочие заметки по SEO (18.11): профиль, журнал правок,
+│                           #   уроки, факты о продукте, гипотезы. НЕ деплоится и не публикуется
 ├── manifest.json           # PWA
 ├── CNAME                   # pdfmerge.dev
 └── pdfmerge-payment-worker.js  # Worker v2: plan pro (amount>=8) — НЕ задеплоен в CF
@@ -91,6 +93,38 @@ pdf-merge/
 | GSC | ✅ Domain property; Request Indexing ×10 отправлен 2026-09-08 |
 | Индексация | ⏳ Главная indexed 15.08; лендинги были «Discovered, not indexed» (каннибализация + 0 backlinks). Toolkit v2 = фикс. Проверить Coverage через 2-3 дня, показы по split/compress через 14 дней |
 | Backlinks | ❌ 0 реальных — приоритет №1 |
+| **SEO workspace `seo/`** | ✅ 18.11 (`c3255bb`) — методика скилла `product-seo`: профиль, журнал правок, уроки, факты о продукте, гипотезы. Ключевой факт из замера: за 90 дней **0 кликов / 54 показа, все брендовые** («pdfmerge» 47, «www.pdfmerge.com» 1). Ни одного небрендового запроса — SEO не начиналось |
+| **Замер `measure.mjs`** | ✅ 18.11 — по `/merge-pdf-offline` вернул `too early`: 0 показов за все недели до и после 14.11 |
+
+## SEO workspace 18.11.2026 (`seo/`)
+
+Читать в начале каждой сессии: `seo/site-profile.md`, `seo/change-log.md`, `seo/lessons.md`.
+Сообщать владельцу, какие проверки наступили или просрочены.
+
+| Файл | Что внутри |
+|---|---|
+| `seo/site-profile.md` | продукт, «кто платит» (5 free ops / $5 / $9), pile A (офлайн-угол) и pile B, standing decisions |
+| `seo/change-log.md` | четыре правки 14.11 с датами проверок (+1 нед, +3 нед) |
+| `seo/lessons.md` | уроки: сначала проверь, есть ли показы; контраст кнопки, а не её наличие |
+| `seo/product-facts.md` | возможности, «не умеет», цены, каждая строка с датой |
+| `seo/experiments.md` | 2 гипотезы с проверкой 05.12 |
+
+**Замер:** Windows-путь обязателен (MSYS `~/...` node не понимает):
+
+```
+export GSC_SERVICE_ACCOUNT_FILE="C:/Users/MiniPC/.hermes/gsc-service-account.json"
+node "C:/Users/MiniPC/AppData/Local/hermes/skills/product-seo/scripts/measure.mjs" \
+  --page /merge-pdf-offline --date 2026-11-14 --site sc-domain:pdfmerge.dev
+```
+
+**Отличие от estate-ledger:** там `measure.mjs` даёт осмысленный тренд, потому что показы
+есть. Здесь пока все показы брендовые — по странице сравнивать нечего. Мерить надо не
+страницу, а **сам факт появления небрендовых показов** в GSC. Пока их нет, любая правка
+текста неизмерима, и первым делом нужны ссылки и сабмит расширения в CWS.
+
+`seo/` не деплоится (`deploy_seo.py` берёт фиксированный список из 24 файлов) и не
+публикуется. Проверено живьём: `/seo/site-profile.md` → 404.
+
 
 ## Тестирование Toolkit (проверено 2026-09-08)
 
