@@ -31,6 +31,8 @@ FILES = [
     'merge-pdf-without-adobe.html', 'compress-pdf-offline.html', 'pdf-merge-no-signup.html',
     'sitemap.xml', 'robots.txt', 'manifest.json', 'icon.svg', 'CNAME',
     'css/style.css', 'js/app.js',
+    # файл-ключ IndexNow (пинг Bing/Yandex об изменениях)
+    '3c69ee8774124ffd8c939c025a5530c5.txt',
 ]
 
 
