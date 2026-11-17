@@ -10,3 +10,8 @@ worker-code-fixed.txt
 
 # Зависимости
 node_modules/
+
+# seo workspace: выгрузки и скриншоты не в git
+seo/data/
+seo/shots/
+seo/backups/
